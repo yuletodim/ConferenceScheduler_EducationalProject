@@ -14,7 +14,7 @@ class DefaultRouter{
 
 //        echo "SCRIPT_NAME: " . $_SERVER['SCRIPT_NAME'] . "<br/>";
 //        echo "PHP_SELF: " . $_SERVER['PHP_SELF'] . "<br/>";
-        echo "URI: " . $_uri . "<br/>";
+//        echo "URI: " . $_uri . "<br/>";
 
         return $_uri;
     }
