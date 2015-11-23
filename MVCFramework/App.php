@@ -17,6 +17,11 @@ class App{
      */
     private $_config = null;
 
+    /**
+     * @var \MVCFramework\FrontController
+     */
+    private $_frontController = null;
+
     private function __construct(){
         \MVCFramework\Loader::registerNamespace('MVCFramework', dirname(__FILE__) . DIRECTORY_SEPARATOR);
         \MVCFramework\Loader::registerAutoload();
@@ -41,6 +46,10 @@ class App{
         if($this->_config->getConfigFolder() ==null){
             $this->setConfigFolder('ConferenceScheduler/Config');
         }
+
+        // instantiate FrontController
+        $this->_frontController = \MVCFramework\FrontController::getInstance();
+        $this->_frontController->dispatch();
     }
 
     /**
@@ -49,9 +58,11 @@ class App{
     public function getConfig(){
         return $this->_config;
     }
+
     public function setConfigFolder(string $path){
         $this->_config->setConfigFolder($path);
     }
+
     public function getConfigFolder(){
         return $this->_configFolder;
     }
