@@ -13,12 +13,6 @@ $app = MVCFramework\App::getInstance();
 $app->run();
 
 
-
-
-
-
-
-
 //$config = \MVCFramework\Config::getInstance();
 //$config->setConfigFolder('ConferenceScheduler/Config');
 //
