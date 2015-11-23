@@ -21,6 +21,7 @@ class App{
      * @var \MVCFramework\FrontController
      */
     private $_frontController = null;
+    private $router;
 
     private function __construct(){
         \MVCFramework\Loader::registerNamespace('MVCFramework', dirname(__FILE__) . DIRECTORY_SEPARATOR);
@@ -49,6 +50,11 @@ class App{
 
         // instantiate FrontController
         $this->_frontController = \MVCFramework\FrontController::getInstance();
+        if($this->router instanceof \MVCFramework\Routers\IRouter){
+            $this->_frontController->setRouter($this->router);
+        } else {
+            $this->_frontController->setRouter(new \MVCFramework\Routers\DefaultRouter());
+        }
         $this->_frontController->dispatch();
     }
 

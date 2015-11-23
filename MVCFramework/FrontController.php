@@ -41,7 +41,6 @@ class FrontController{
     }
 
     public function dispatch(){
-        $this->router = new \MVCFramework\Routers\DefaultRouter();
         if($this->router == NULL){
             throw new \Exception('No valid router found.', 500);
         }
@@ -49,6 +48,7 @@ class FrontController{
         $_uri = $this->router->getUri();
         var_dump($_uri);
 
+        $routes = \MVCFramework\App::getInstance()->getConfig()->routes;
         $_params = explode('/', $_uri);
 
         // $input = \MVCFramework\InputData::getInstance();
@@ -71,7 +71,8 @@ class FrontController{
 
         echo "Controller: ". $this->controller ."<br/>";
         echo "Method: ". $this-> method ."<br/>";
-        echo "Params: ".print_r($getParams)."<br/>";
+        echo "Params: <br/>";
+        print_r($getParams);
     }
 
     public function getDefaultCotroller(){
