@@ -1,10 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Yulia
- * Date: 23.11.2015
- * Time: 19:18
- */
+// Define a namespace
+$config['admin']['namespace'] = 'Admin\Controllers';
+
+// Override controller
+$config['admin']['controllers']['home2']['to'] = 'adminHome';
+
+// Override method
+$config['admin']['controllers']['home2']['methods']['index2'] = 'adminIndex';
 
 // The most common case is last
 $config['*']['namespace'] = 'Controllers';
