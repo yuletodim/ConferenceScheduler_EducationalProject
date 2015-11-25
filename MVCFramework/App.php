@@ -21,12 +21,13 @@ class App{
      * @var \MVCFramework\FrontController
      */
     private $_frontController = null;
-    private $router;
+    private $_router;
+    private $_dbConnections = array();
+    private $_session = null;
 
     private function __construct(){
         \MVCFramework\Loader::registerNamespace('MVCFramework', dirname(__FILE__) . DIRECTORY_SEPARATOR);
         \MVCFramework\Loader::registerAutoload();
-
         $this->_config = \MVCFramework\Config::getInstance();
     }
 
@@ -34,28 +35,11 @@ class App{
      * @return \MVCFramework\App
      */
     public static function getInstance(){
-        if(self::$_instance == null){
+        if(self::$_instance == NULL){
             self::$_instance = new \MVCFramework\App();
         }
 
         return self::$_instance;
-    }
-
-    public function run(){
-        echo "Main method: \$app->run() <br/>";
-        // if config folder is not set use default one
-        if($this->_config->getConfigFolder() ==null){
-            $this->setConfigFolder('ConferenceScheduler/Config');
-        }
-
-        // instantiate FrontController
-        $this->_frontController = \MVCFramework\FrontController::getInstance();
-        if($this->router instanceof \MVCFramework\Routers\IRouter){
-            $this->_frontController->setRouter($this->router);
-        } else {
-            $this->_frontController->setRouter(new \MVCFramework\Routers\DefaultRouter());
-        }
-        $this->_frontController->dispatch();
     }
 
     /**
@@ -71,5 +55,46 @@ class App{
 
     public function getConfigFolder(){
         return $this->_configFolder;
+    }
+
+    public function run(){
+        // if config folder is not set use default one
+        if($this->_config->getConfigFolder() == NULL){
+            $this->setConfigFolder('ConferenceScheduler/Config');
+        }
+
+        // instantiate FrontController
+        $this->_frontController = \MVCFramework\FrontController::getInstance();
+        if($this->_router instanceof \MVCFramework\Routers\IRouter){
+            $this->_frontController->setRouter($this->_router);
+        } else {
+            $this->_frontController->setRouter(new \MVCFramework\Routers\DefaultRouter());
+        }
+        $this->_frontController->dispatch();
+    }
+
+    public function getDbConnection(string $connection = 'default'){
+        if(!$connection){
+            throw new \Exception('No connection identifier provided.', 500);
+        }
+
+        if($this->_dbConnections[$connection]){
+            return $this->_dbConnections[$connection];
+        }
+
+        $_dbConfig = $this->getConfig()->database;
+        if(!$_dbConfig[$connection]){
+            throw new \Exception('No connection identifier provided.', 500);
+        }
+
+        $dsn = $_dbConfig[$connection]['connection_url'];
+        $user = $_dbConfig[$connection]['username'];
+        $pass = $_dbConfig[$connection]['password'];
+        $options = $_dbConfig[$connection]['pdo_options'];
+
+        $pdo = new \PDO($dsn, $user, $pass, $options);
+        $this->_dbConnections[$connection] = $pdo;
+
+        return $this->_dbConnections[$connection];
     }
 }

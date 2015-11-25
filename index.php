@@ -11,6 +11,7 @@ include 'MVCFramework/App.php';
 
 $app = MVCFramework\App::getInstance();
 $app->run();
+var_dump($app->getDbConnection());
 
 
 //$config = \MVCFramework\Config::getInstance();
@@ -18,3 +19,14 @@ $app->run();
 //
 //\MVCFramework\Loader::registerNamespace('Test\Models',
 //    'ConferenceScheduler\Models');
+
+$db = new \MVCFramework\Database();
+$stmt = $db->prepare('SELECT * FROM users');
+$stmt->execute();
+print_r($stmt->fetchAllAssoc());
+echo '<br/>';
+
+$stmt_2 = $db->prepare('SELECT name, age FROM users WHERE id=?');
+$stmt_2->execute(array(1));
+print_r($stmt_2->fetchRowAssoc());
+echo '<br/>';
