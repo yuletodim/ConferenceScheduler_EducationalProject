@@ -57,10 +57,47 @@ class App{
         return $this->_configFolder;
     }
 
+    public function getSession():\MVCFramework\Sessions\ISession{
+        return $this->_session;
+    }
+    // option to set custom session
+    public function setSession(\MVCFramework\Sessions\ISession $session){
+        $this->_session = $session;
+    }
+
     public function run(){
         // if config folder is not set use default one
         if($this->_config->getConfigFolder() == NULL){
             $this->setConfigFolder('ConferenceScheduler/Config');
+        }
+        // start session
+        $_sess = $this->_config->app['session'];
+        if($_sess['autostart']) {
+            if ($_sess['type'] == 'native') {
+                $_session = new \MVCFramework\Sessions\NativeSession(
+                    $_sess['name'],
+                    $_sess['lifetime'],
+                    $_sess['path'],
+                    $_sess['domain'],
+                    $_sess['secure']
+                );
+
+                $this->setSession($_session);
+//            } else if ($_sess['type'] == 'database') {
+//                $_session = new \MVCFramework\Sessions\DBSession(
+//                    $_sess['db_connection'],
+//                    $_sess['name'],
+//                    $_sess['db_table'],
+//                    $_sess['lifetime'],
+//                    $_sess['path'],
+//                    $_sess['domain'],
+//                    $_sess['secure']
+//                );
+//
+//                $this->setSession($_session);
+            } else {
+                throw new \Exception('No valid session.', 500);
+            }
         }
 
         // instantiate FrontController
