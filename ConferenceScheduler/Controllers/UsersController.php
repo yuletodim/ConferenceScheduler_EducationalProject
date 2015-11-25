@@ -9,10 +9,10 @@ namespace Controllers;
 
 class UsersController{
     public function index(){
-        echo 'it works';
+        echo "<h1>it works</h1>";
     }
 
     public function edit(){
-        echo 'you can edit';
+        echo "<h1>you can edit</h1>";
     }
 }

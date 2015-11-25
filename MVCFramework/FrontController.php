@@ -16,9 +16,13 @@ class FrontController{
     private $namespace = null;
     private $controller = null;
     private $method = null;
+    /**
+     * @var \MVCFramework\HttpContext
+     */
+    private $context = null;
 
     private function __construct(){
-
+        $this->context = \MVCFramework\HttpContext::getInstance();
     }
 
     /**
@@ -41,7 +45,6 @@ class FrontController{
     }
 
     public function dispatch(){
-
         if($this->router == NULL){
             throw new \Exception('No valid router found.', 500);
         }
@@ -72,12 +75,11 @@ class FrontController{
             $this->namespace = $routes['*']['namespace'];
             $_cacheNamespace = $routes['*'];
         } else if($this->namespace == NULL && !$routes['*']['namespace']) {
-            throw new \Exception('default route is missing.', 500);
+            throw new \Exception('Default route is missing.', 500);
         }
 
+        echo 'Uri_2: ' . $_uri . '<br/>';
         $_params = explode('/', $_uri);
-
-        // $input = \MVCFramework\InputData::getInstance();
 
         if($_params[0]){
             $this->controller = strtolower($_params[0]);
@@ -86,7 +88,7 @@ class FrontController{
                 $this->method = strtolower($_params[1]);
                 unset($_params[0], $_params[1]);
                 $getParams = array_values($_params);
-                // $input->setGet($getParams);
+                $this->context->setGet($getParams);
             } else {
                 $this->method = $this->getDefaultMethod();
             }
@@ -106,19 +108,21 @@ class FrontController{
             $this->controller = strtolower($_cacheNamespace['controllers'][$this->controller]['to']);
         }
 
-        echo "Namespace: " . $this->namespace ."<br/>";
-        echo "Controller: ". $this->controller ."<br/>";
-        echo "Method: ". $this-> method ."<br/>";
-        echo "Params: <br/>";
-        print_r($getParams);
+        // echo "Namespace: " . $this->namespace ."<br/>";
+        // echo "Controller: ". $this->controller ."<br/>";
+        // echo "Method: ". $this-> method ."<br/>";
+        // echo "Params: <br/>";
+        // print_r($getParams);
 
-        // $input->setPost($this->router->getPost());
+        $this->context->setPost($this->router->getPost());
+        echo "Get input: " . print_r($this->context->getGetArray()) . "<br/>";
+        echo "Post input: " . print_r($this->context->getPostArray()) . "<br/>";
+        echo "Cookies input: " . print_r($this->context->getCookiesArray()) . "<br/>";
 
         $fileController = $this->namespace . '\\' .ucfirst($this->controller) . 'Controller';
-        echo $fileController . '<br/>';
+        // echo $fileController . '<br/>';
         $currentController = new $fileController();
         $currentController->{$this->method}();
-
     }
 
     public function getDefaultCotroller(){

@@ -15,11 +15,7 @@ final class Loader{
     }
 
     public static function registerAutoLoad(){
-        spl_autoload_register(array("\MVCFramework\Loader", 'autoload'));
-    }
-
-    public static function autoload(string $class){
-        self::loadClass($class);
+        spl_autoload_register(array("\MVCFramework\Loader", 'loadClass'));
     }
 
     public static function loadClass(string $class){
@@ -36,7 +32,6 @@ final class Loader{
                     throw new \Exception("Can not find file: " . $file);
                 }
             }
-
         }
     }
 
@@ -50,7 +45,7 @@ final class Loader{
             $_path = realpath($path);
             if($_path && is_dir($_path) && is_readable($_path)){
                 self::$namespaces[$namespace . '\\'] = $_path . DIRECTORY_SEPARATOR;
-                echo "Loader registered namespace: " . $namespace . '\\' . ' -> '. $_path . DIRECTORY_SEPARATOR . "<br/>";
+                // echo "Loader registered namespace: " . $namespace . '\\' . ' -> '. $_path . DIRECTORY_SEPARATOR . "<br/>";
             } else {
                 throw new \Exception('Namespace directory error: ' . $path);
             }
@@ -68,6 +63,7 @@ final class Loader{
             throw new \Exception('Invalid namespace.');
         }
     }
+
     public static function getNamespaces(){
         return self::$namespaces;
     }

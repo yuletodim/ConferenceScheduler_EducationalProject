@@ -9,6 +9,6 @@ namespace Admin\Controllers;
 
 class HomeController{
     public function index(){
-        echo 'admin area';
+        echo "<h1>admin area</h1>";
     }
 }

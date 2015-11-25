@@ -10,6 +10,6 @@ $config['default_method']= 'index';
 
 $config['namespaces']['Controllers'] = 'ConferenceScheduler/Controllers';
 $config['namespaces']['Models'] = 'ConferenceScheduler/Models';
-$config['namespaces']['Admin\\Controllers'] = 'ConferenceScheduler/Admin/Controllers';
+$config['namespaces']['Admin\Controllers'] = 'ConferenceScheduler/Admin/Controllers';
 
 return $config;

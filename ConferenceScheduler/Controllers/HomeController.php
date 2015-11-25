@@ -9,6 +9,6 @@ namespace Controllers;
 
 class HomeController{
     public function index(){
-        echo 'this is the home';
+        echo "<h1>this is the home</h1>";
     }
 }
