@@ -13,7 +13,7 @@ $config['namespaces']['Models'] = 'ConferenceScheduler/Models';
 $config['namespaces']['Admin\Controllers'] = 'ConferenceScheduler/Admin/Controllers';
 
 $config['session']['autostart'] = true;
-$config['session']['type'] = 'native';
+$config['session']['type'] = 'database';
 $config['session']['name'] = '_sess';
 $config['session']['lifetime'] = 3600;
 $config['session']['path'] = '/';

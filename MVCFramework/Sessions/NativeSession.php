@@ -23,7 +23,7 @@ class NativeSession implements \MVCFramework\Sessions\ISession{
         session_start();
     }
 
-    public function __get(string $name): string{
+    public function __get(string $name){
         return $_SESSION[$name];
     }
 
@@ -35,7 +35,7 @@ class NativeSession implements \MVCFramework\Sessions\ISession{
         session_destroy();
     }
 
-    public function getSessionId():string{
+    public function getSessionId(){
         return session_id();
     }
 

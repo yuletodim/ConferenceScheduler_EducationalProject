@@ -17,10 +17,7 @@ class HttpContext{
         $this->_cookies = $_COOKIE;
     }
 
-    /**
-     * @return \MVCFramework\HttpContext
-     */
-    public static function getInstance(){
+    public static function getInstance() : \MVCFramework\HttpContext{
         if(self::$_instance == NULL){
             self::$_instance = new \MVCFramework\HttpContext();
         }
@@ -36,27 +33,27 @@ class HttpContext{
         $this->_post = $postInput;
     }
 
-    public function hasGetValue(int $position){
+    public function hasGetValue(int $position) : bool{
         return array_key_exists($position, $this->_get);
     }
 
-    public function hasPostValue(string $name){
+    public function hasPostValue(string $name) : bool{
         return array_key_exists($name, $this->_post);
     }
 
-    public function hasCookieValue(string $name){
+    public function hasCookieValue(string $name) : bool{
         return array_key_exists($name, $this->_cookies);
     }
 
-    public function getGetArray(){
+    public function getGetArray() : array {
         return $this->_get;
     }
 
-    public function getPOstArray(){
+    public function getPostArray() : array {
         return $this->_post;
     }
 
-    public function getCookiesArray(){
+    public function getCookiesArray() : array{
         return $this->_cookies;
     }
 
