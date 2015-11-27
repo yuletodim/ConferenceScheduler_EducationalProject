@@ -34,7 +34,7 @@ class DBSession extends \MVCFramework\Database implements \MVCFramework\Sessions
         $this->secure = $secure;
         $this->sessionId = $_COOKIE[$name];
 
-        if(strlen($this->sessionId) < 32){
+        if($this->sessionId == NULL || strlen($this->sessionId) < 32){
             $this->_startNewSession();
         }
         else if(!$this->_isSessionValid()){

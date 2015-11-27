@@ -9,7 +9,8 @@ namespace MVCFramework;
 
 include_once 'Loader.php';
 
-class App{
+class App
+{
     private static $_instance = null;
 
     /**

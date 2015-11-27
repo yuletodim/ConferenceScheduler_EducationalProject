@@ -7,7 +7,8 @@
  */
 namespace MVCFramework;
 
-class HttpContext{
+class HttpContext
+{
     private static $_instance = null;
     private $_get = array();
     private $_post = array();

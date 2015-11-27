@@ -7,7 +7,8 @@
  */
 namespace MVCFramework;
 
-class FrontController{
+class FrontController
+{
     private static $_instance = null;
     /**
      * @var \MVCFramework\Routers\IRouter
@@ -25,10 +26,7 @@ class FrontController{
         $this->context = \MVCFramework\HttpContext::getInstance();
     }
 
-    /**
-     * @return \MVCFramework\FrontController
-     */
-    public static function getInstance(){
+    public static function getInstance() : \MVCFramework\FrontController{
         if(self::$_instance == NULL){
             self::$_instance = new \MVCFramework\FrontController();
         }

@@ -7,7 +7,8 @@
  */
 namespace MVCFramework;
 
-final class Loader{
+final class Loader
+{
     private static $namespaces = array();
 
     private function __construct(){

@@ -7,7 +7,8 @@
  */
 namespace MVCFramework;
 
-class Database{
+class Database
+{
     protected $connection = 'default';
     // to extend use protected $connection = 'session';
 

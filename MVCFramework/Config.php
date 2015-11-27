@@ -7,7 +7,8 @@
  */
 namespace MVCFramework;
 
-class Config{
+class Config
+{
     private static $_instance = null;
     private $_configFolder = null;
     // cache all included files
@@ -16,10 +17,7 @@ class Config{
     private function __construct(){
     }
 
-    /**
-     * \MVCFramework\Config
-     */
-    public static function getInstance(){
+    public static function getInstance() : \MVCFramework\Config{
         if(self::$_instance == NULL){
             self::$_instance = new \MVCFramework\Config();
         }
