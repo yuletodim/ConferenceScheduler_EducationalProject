@@ -27,6 +27,7 @@ class App
     private $_session = null;
 
     private function __construct(){
+        set_exception_handler(array($this, '_exceptionHandler'));
         \MVCFramework\Loader::registerNamespace('MVCFramework', dirname(__FILE__) . DIRECTORY_SEPARATOR);
         \MVCFramework\Loader::registerAutoload();
         $this->_config = \MVCFramework\Config::getInstance();
@@ -128,6 +129,23 @@ class App
         $this->_dbConnections[$connection] = $pdo;
 
         return $this->_dbConnections[$connection];
+    }
+
+    public function _exceptionHandler(\Exception $ex){
+        if($this->_config && $this->_config->app['display_exceptions'] == true){
+            echo '<pre>' . print_r($ex, true) . '</pre>';
+        } else {
+            $this->displayError($ex->getCode());
+        }
+    }
+
+    public function displayError($error){
+        try{
+            $view = \MVCFramework\View::getInstance();
+            $view->display('errors' . $error);
+        }catch(\Exception $exc){
+            echo '<h1>' . $error . '</h1>';
+        }
     }
 
     public function __destruct(){

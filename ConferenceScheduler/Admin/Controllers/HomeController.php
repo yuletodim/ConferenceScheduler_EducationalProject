@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * Created by PhpStorm.
  * User: Yulia
@@ -7,12 +7,11 @@
  */
 namespace Admin\Controllers;
 
-class HomeController{
+class HomeController extends \MVCFramework\BaseController
+{
     public function index(){
-        $view = \MVCFramework\View::getInstance();
-        $view->username = 'admin';
-        $view->display('Admin.index');
-
-
+        //$view = \MVCFramework\View::getInstance();
+        $this->view->username = 'admin';
+        $this->view->display('admin.index');
     }
 }

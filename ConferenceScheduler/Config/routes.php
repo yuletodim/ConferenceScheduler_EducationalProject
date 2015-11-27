@@ -1,6 +1,6 @@
 <?php
 // Define a namespace
-$config['admin']['namespace'] = 'Admin\Controllers';
+$config['admin']['namespace'] = 'admin\Controllers';
 
 // Override controller
 $config['admin']['controllers']['home2']['to'] = 'adminHome';
