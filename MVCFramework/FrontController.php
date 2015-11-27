@@ -22,6 +22,10 @@ class FrontController
      */
     private $context = null;
 
+    const CONTROLLERS_SUFFIX = 'Controller';
+    const DEFAULT_CONTROLLER = 'home';
+    const DEFAULT_METHOD = 'index';
+
     private function __construct(){
         $this->context = \MVCFramework\HttpContext::getInstance();
     }
@@ -60,9 +64,10 @@ class FrontController
         if(is_array($routes) && count($routes) > 0){
             foreach($routes as $key => $value){
                 if(stripos($_uri, $key) === 0 &&
-                        ($_uri == $key || stripos($_uri, $key.'/') === 0) &&
+                        ($_uri == $key || stripos($_uri, $key.'/') === 0 || $_uri == ucfirst($key)) &&
                         $value['namespace']){
                     $this->namespace = $value['namespace'];
+                    echo strlen($key)+1;
                     $_uri = substr($_uri, strlen($key)+1);
                     $_cacheNamespace = $value;
                     break;
@@ -123,7 +128,7 @@ class FrontController
         echo "Post input: " . print_r($this->context->getPostArray()) . "<br/>";
         echo "Cookies input: " . print_r($this->context->getCookiesArray()) . "<br/>";
 
-        $fileController = $this->namespace . '\\' .ucfirst($this->controller) . 'Controller';
+        $fileController = $this->namespace . '\\' .ucfirst($this->controller) . self::CONTROLLERS_SUFFIX;
         // echo $fileController . '<br/>';
         $currentController = new $fileController();
         $currentController->{$this->method}();
@@ -135,7 +140,7 @@ class FrontController
             return strtolower($controller);
         }
 
-        return 'home';
+        return self::DEFAULT_CONTROLLER;
     }
 
     public function getDefaultMethod(){
@@ -144,6 +149,6 @@ class FrontController
             return strtolower($method);
         }
 
-        return 'index';
+        return self::DEFAULT_METHOD;
     }
 }

@@ -9,6 +9,10 @@ namespace Admin\Controllers;
 
 class HomeController{
     public function index(){
-        echo "<h1>admin area</h1>";
+        $view = \MVCFramework\View::getInstance();
+        $view->username = 'admin';
+        $view->display('Admin.index');
+
+
     }
 }

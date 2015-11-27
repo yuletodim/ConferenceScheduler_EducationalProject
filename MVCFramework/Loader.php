@@ -11,6 +11,8 @@ final class Loader
 {
     private static $namespaces = array();
 
+    const FILE_EXTENSION = '.php';
+
     private function __construct(){
 
     }
@@ -24,7 +26,7 @@ final class Loader
         foreach(self::$namespaces as $key=> $value){
             if(strpos($class, $key) === 0){
                 $file = str_replace('\\', DIRECTORY_SEPARATOR, $class);
-                $file = substr_replace($file, $value, 0, strlen($key)) . '.php';
+                $file = substr_replace($file, $value, 0, strlen($key)) . self::FILE_EXTENSION;
                 $file = realpath($file);
                 if($file && is_readable($file)){
                     echo 'Loaded class: ' . $file .'<br>';

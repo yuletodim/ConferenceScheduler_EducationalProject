@@ -22,7 +22,7 @@ $config['session']['secure'] = false;
 $config['session']['db_connection'] = 'default';
 $config['session']['db_table'] = 'sessions';
 
-$config['views_dir'] = 'Views';
+$config['views_dir'] = 'ConferenceScheduler/Views';
 
 $config['display_exceptions'] = false;
 
