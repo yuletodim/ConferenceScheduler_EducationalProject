@@ -50,6 +50,9 @@ class FrontController{
         }
 
         $_uri = $this->router->getUri();
+        if($_uri == NULL){
+            $_uri = '/';
+        }
         echo 'Uri: ' . $_uri . '<br/>';
 
         $routes = \MVCFramework\App::getInstance()->getConfig()->routes;
@@ -78,6 +81,9 @@ class FrontController{
             throw new \Exception('Default route is missing.', 500);
         }
 
+        if($_uri == NULL){
+            $_uri = '/';
+        }
         echo 'Uri_2: ' . $_uri . '<br/>';
         $_params = explode('/', $_uri);
 

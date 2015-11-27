@@ -11,7 +11,8 @@ include 'MVCFramework/App.php';
 
 $app = MVCFramework\App::getInstance();
 $app->run();
-var_dump($app->getDbConnection());
+
+//var_dump($app->getDbConnection());
 
 
 //$config = \MVCFramework\Config::getInstance();
@@ -31,5 +32,5 @@ var_dump($app->getDbConnection());
 //print_r($stmt_2->fetchRowAssoc());
 //echo '<br/>';
 
-$app->getSession()->counter+=1;
-echo $app->getSession()->counter;
+//$app->getSession()->counter+=1;
+//echo $app->getSession()->counter;

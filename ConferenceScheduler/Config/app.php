@@ -20,7 +20,7 @@ $config['session']['path'] = '/';
 $config['session']['domain'] = '';
 $config['session']['secure'] = false;
 $config['session']['db_connection'] = 'default';
-$config['session']['db_table'] = 'session';
+$config['session']['db_table'] = 'sessions';
 
 $config['display_exceptions'] = false;
 

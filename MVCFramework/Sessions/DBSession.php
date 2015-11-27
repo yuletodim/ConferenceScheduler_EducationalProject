@@ -1,4 +1,4 @@
-<?php declare(stict_types=1);
+<?php declare(strict_types=1);
 /**
  * Created by PhpStorm.
  * User: Yulia
@@ -31,6 +31,7 @@ class DBSession extends \MVCFramework\Database implements \MVCFramework\Sessions
         $this->lifetime = $lifetime;
         $this->path = $path;
         $this->domain = $domain;
+        $this->secure = $secure;
         $this->sessionId = $_COOKIE[$name];
 
         if(strlen($this->sessionId) < 32){

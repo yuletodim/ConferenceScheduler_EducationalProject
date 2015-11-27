@@ -31,10 +31,7 @@ class App{
         $this->_config = \MVCFramework\Config::getInstance();
     }
 
-    /**
-     * @return \MVCFramework\App
-     */
-    public static function getInstance(){
+    public static function getInstance() : \MVCFramework\App{
         if(self::$_instance == NULL){
             self::$_instance = new \MVCFramework\App();
         }
@@ -42,10 +39,7 @@ class App{
         return self::$_instance;
     }
 
-    /**
-     * @return \MVCFramework\Config
-     */
-    public function getConfig(){
+    public function getConfig() : \MVCFramework\Config{
         return $this->_config;
     }
 
@@ -57,7 +51,7 @@ class App{
         return $this->_configFolder;
     }
 
-    public function getSession():\MVCFramework\Sessions\ISession{
+    public function getSession() : \MVCFramework\Sessions\ISession{
         return $this->_session;
     }
     // option to set custom session
