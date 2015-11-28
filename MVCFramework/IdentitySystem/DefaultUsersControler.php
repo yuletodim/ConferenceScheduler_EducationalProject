@@ -26,9 +26,9 @@ class DefaultUsersControler extends \MVCFramework\BaseController
         if($currentUser){
             $this->context->setSession();
             $this->context->setUser($currentUser);
-            header("Location: users/profile");
+            header("Location: profile");
         } else {
-            header("Location: users/register");
+            header("Location: register");
         }
     }
 
@@ -42,9 +42,9 @@ class DefaultUsersControler extends \MVCFramework\BaseController
         if($currentUser){
             $this->context->setSession();
             $this->context->setUser($currentUser);
-            header("Location: users/profile");
+            header("Location: profile");
         } else {
-            header("Location: users/login");
+            header("Location: login");
         }
     }
 

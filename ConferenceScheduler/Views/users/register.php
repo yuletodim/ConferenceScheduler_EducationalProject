@@ -1,8 +1,7 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Yulia
- * Date: 27.11.2015
- * Time: 21:30
- */
-echo 'register here';
+<form action="" method="post">
+    Username: <input type="text" name="username" />
+    Email: <input type="email" name="email" />
+    Password: <input type="password" name="password" />
+    Repeate password: <input type="password" name="repeat-password" />
+    <input type="submit" value="Register" />
+</form>

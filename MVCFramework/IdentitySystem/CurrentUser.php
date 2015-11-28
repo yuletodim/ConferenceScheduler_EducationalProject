@@ -14,7 +14,7 @@ class CurrentUser
     private $username;
     private $password;
 
-    public function __construct($id, $user, $password)
+    public function __construct(int $id, string $user, string $password)
     {
         $this->setId($id)
             ->setUsername($user)
@@ -26,7 +26,7 @@ class CurrentUser
         return $this->id;
     }
 
-    private function setId(int $id)
+    public function setId(int $id)
     {
         $this->id = $id;
         return $this;
@@ -37,7 +37,7 @@ class CurrentUser
         return $this->username;
     }
 
-    private function setUsername(string $username)
+    public function setUsername(string $username)
     {
         $this->username = $username;
         return $this;
@@ -48,7 +48,7 @@ class CurrentUser
         return $this->password;
     }
 
-    private function setPassword(string $password)
+    public function setPassword(string $password)
     {
         $this->password = $password;
         return $this;

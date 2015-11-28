@@ -115,9 +115,9 @@ class FrontController
             $this->controller = strtolower($_cacheNamespace['controllers'][$this->controller]['to']);
         }
 
-        // echo "Namespace: " . $this->namespace ."<br/>";
-        // echo "Controller: ". $this->controller ."<br/>";
-        // echo "Method: ". $this-> method ."<br/>";
+         echo "Namespace: " . $this->namespace ."<br/>";
+         echo "Controller: ". $this->controller ."<br/>";
+         echo "Method: ". $this-> method ."<br/>";
         // echo "Params: <br/>";
         // print_r($getParams);
         $getParams = array_values($_params);
