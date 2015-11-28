@@ -14,11 +14,12 @@ class HomeController extends \MVCFramework\BaseController
 
 //        $view = \MVCFramework\View::getInstance();
 //        $view->id = \MVCFramework\HttpContext::getInstance()->getGet(0, 'int');
-        $this->view->id = $this->context->getGet(0, 'int');
+
+        $this->view->id = $this->context->getRequest()->getGet(0, 'int');
         $this->view->test = 'TEST';
-        $this->view->appendToLayout('header', 'partials.header');
+        $this->view->appendToLayout('layout_header', 'partials.layout_header');
         $this->view->appendToLayout('body', 'index');
-        $this->view->appendToLayout('side', 'side_bar');
+        //$this->view->appendToLayout('side', 'partials.side_bar');
         $this->view->display('layouts.default_template', array('arr' => array(1, 2, 3)));
         // => if edi kakvo si display edi koi si template
     }

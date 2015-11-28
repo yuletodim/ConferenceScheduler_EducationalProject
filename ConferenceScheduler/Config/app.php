@@ -5,12 +5,13 @@
  * Date: 22.11.2015
  * Time: 14:15
  */
+$config['app_name'] = 'ConferenceScheduler_EducationalProject';
 $config['default_controller'] = 'Home';
 $config['default_method']= 'index';
 
 $config['namespaces']['Controllers'] = 'ConferenceScheduler/Controllers';
 $config['namespaces']['Models'] = 'ConferenceScheduler/Models';
-$config['namespaces']['admin\Controllers'] = 'ConferenceScheduler/admin/Controllers';
+$config['namespaces']['Admin\Controllers'] = 'ConferenceScheduler/Admin/Controllers';
 
 $config['session']['autostart'] = true;
 $config['session']['type'] = 'database';

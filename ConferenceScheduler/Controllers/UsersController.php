@@ -7,12 +7,20 @@
  */
 namespace Controllers;
 
-class UsersController{
+use MVCFramework\BaseController;
+
+class UsersController extends BaseController
+{
     public function index(){
         echo "<h1>it works</h1>";
     }
 
     public function edit(){
         echo "<h1>you can edit</h1>";
+    }
+
+    public function register(){
+        //$this->view->appendToLayout('body', 'users.register');
+        $this->view->display('layouts.default');
     }
 }

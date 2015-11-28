@@ -9,12 +9,11 @@ namespace MVCFramework\Routers;
 
 class DefaultRouter implements \MVCFramework\Routers\IRouter{
     public function getUri(){
-        $nameLength = strlen($_SERVER['SCRIPT_NAME']) + 1;
-        $_uri = substr($_SERVER['PHP_SELF'], $nameLength);
-
-        // echo "SCRIPT_NAME: " . $_SERVER['SCRIPT_NAME'] . "<br/>";
-        // echo "PHP_SELF: " . $_SERVER['PHP_SELF'] . "<br/>";
-        // echo "URI: " . $_uri . "<br/>";
+//        $nameLength = strlen($_SERVER['SCRIPT_NAME']) + 1;
+//        $_uri = substr($_SERVER['PHP_SELF'], $nameLength);
+        $appName = \MVCFramework\App::getInstance()->getConfig()->app['app_name'];
+        $_uri = $_SERVER['REQUEST_URI'];
+        $_uri = substr($_uri, strlen($appName)+2);
 
         return $_uri;
     }

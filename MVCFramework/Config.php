@@ -49,7 +49,7 @@ class Config
             throw new \Exception('Config directory read error: ' . $configFolder);
         }
 
-        echo "Actual config folder from getConfigFolder method: " . $configFolder . "<br/>";
+        // echo "Actual config folder from getConfigFolder method: " . $configFolder . "<br/>";
     }
 
     // magic function that adds/gets a feature

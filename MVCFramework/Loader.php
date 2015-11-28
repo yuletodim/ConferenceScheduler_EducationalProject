@@ -22,14 +22,14 @@ final class Loader
     }
 
     public static function loadClass(string $class){
-        echo 'Path of loaded class: ' . $class .'<br>';
+        // echo 'Path of loaded class: ' . $class .'<br>';
         foreach(self::$namespaces as $key=> $value){
             if(strpos($class, $key) === 0){
                 $file = str_replace('\\', DIRECTORY_SEPARATOR, $class);
                 $file = substr_replace($file, $value, 0, strlen($key)) . self::FILE_EXTENSION;
                 $file = realpath($file);
                 if($file && is_readable($file)){
-                    echo 'Loaded class: ' . $file .'<br>';
+                    // echo 'Loaded class: ' . $file .'<br>';
                     include $file;
                 } else {
                     throw new \Exception("Can not find file: " . $file);

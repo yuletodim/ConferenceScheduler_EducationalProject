@@ -55,7 +55,6 @@ class FrontController
         if($_uri == NULL){
             $_uri = '/';
         }
-        echo 'Uri: ' . $_uri . '<br/>';
 
         $routes = \MVCFramework\App::getInstance()->getConfig()->routes;
 
@@ -87,7 +86,7 @@ class FrontController
         if($_uri == NULL){
             $_uri = '/';
         }
-        echo 'Uri_2: ' . $_uri . '<br/>';
+
         $_params = explode('/', $_uri);
 
         if($_params[0]){
@@ -96,8 +95,7 @@ class FrontController
             if($_params[1]){
                 $this->method = strtolower($_params[1]);
                 unset($_params[0], $_params[1]);
-                $getParams = array_values($_params);
-                $this->context->setGet($getParams);
+
             } else {
                 $this->method = $this->getDefaultMethod();
             }
@@ -122,10 +120,12 @@ class FrontController
         // echo "Method: ". $this-> method ."<br/>";
         // echo "Params: <br/>";
         // print_r($getParams);
-
-        $this->context->setPost($this->router->getPost());
-        echo "Get input: " . print_r($this->context->getGetArray()) . "<br/>";
-        echo "Post input: " . print_r($this->context->getPostArray()) . "<br/>";
+        $getParams = array_values($_params);
+        $postParams = $this->router->getPost();
+        $request = new \MVCFramework\Request($getParams, $postParams);
+        $this->context->setRequest($request);
+        echo "Get input: " . print_r($this->context->getRequest()->getGetArray()) . "<br/>";
+        echo "Post input: " . print_r($this->context->getRequest()->getPostArray()) . "<br/>";
         echo "Cookies input: " . print_r($this->context->getCookiesArray()) . "<br/>";
 
         $fileController = $this->namespace . '\\' .ucfirst($this->controller) . self::CONTROLLERS_SUFFIX;

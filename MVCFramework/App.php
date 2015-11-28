@@ -27,7 +27,7 @@ class App
     private $_session = null;
 
     private function __construct(){
-        set_exception_handler(array($this, '_exceptionHandler'));
+        //set_exception_handler(array($this, '_exceptionHandler'));
         \MVCFramework\Loader::registerNamespace('MVCFramework', dirname(__FILE__) . DIRECTORY_SEPARATOR);
         \MVCFramework\Loader::registerAutoload();
         $this->_config = \MVCFramework\Config::getInstance();
@@ -56,6 +56,7 @@ class App
     public function getSession() : \MVCFramework\Sessions\ISession{
         return $this->_session;
     }
+
     // option to set custom session
     public function setSession(\MVCFramework\Sessions\ISession $session){
         $this->_session = $session;

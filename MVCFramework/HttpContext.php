@@ -10,8 +10,11 @@ namespace MVCFramework;
 class HttpContext
 {
     private static $_instance = null;
-    private $_get = array();
-    private $_post = array();
+
+    /**
+     * @var \MVCFramework\Request
+     */
+    private $_request = null;
     private $_cookies = array();
 
     private function __construct(){
@@ -26,60 +29,20 @@ class HttpContext
         return self::$_instance;
     }
 
-    public function setGet(array $getInput){
-        $this->_get = $getInput;
+    public function setRequest(\MVCFramework\Request $request){
+        $this->_request = $request;
     }
 
-    public function setPost(array $postInput){
-        $this->_post = $postInput;
-    }
-
-    public function hasGetValue(int $position) : bool{
-        return array_key_exists($position, $this->_get);
-    }
-
-    public function hasPostValue(string $name) : bool{
-        return array_key_exists($name, $this->_post);
+    public function getRequest() : \MVCFramework\Request{
+        return $this->_request;
     }
 
     public function hasCookieValue(string $name) : bool{
         return array_key_exists($name, $this->_cookies);
     }
 
-    public function getGetArray() : array {
-        return $this->_get;
-    }
-
-    public function getPostArray() : array {
-        return $this->_post;
-    }
-
     public function getCookiesArray() : array{
         return $this->_cookies;
-    }
-
-    public function getGet(int $position, string $normalize = null, $defaultValue = null){
-        if($this->hasGetValue($position)){
-            if($normalize != NULL){
-                return \MVCFramework\Utilities::normalize($this->_get[$position], $normalize);
-            }
-
-            return $this->_get[$position];
-        }
-
-        return $defaultValue;
-    }
-
-    public function getPost(string $name, string $normalize = null, $defaultValue = null){
-        if($this->hasPostValue($name)){
-            if($normalize != NULL){
-                return \MVCFramework\Utilities::normalize($this->_post[$name], $normalize);
-            }
-
-            return $this->_post[$name];
-        }
-
-        return $defaultValue;
     }
 
     public function getCookies(string $name, string $normalize = null, $defaultValue = null){
