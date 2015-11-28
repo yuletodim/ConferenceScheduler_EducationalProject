@@ -9,7 +9,7 @@ namespace Controllers;
 
 use MVCFramework\BaseController;
 
-class UsersController extends BaseController
+class UsersController extends \MVCFramework\IdentitySystem\DefaultUsersControler
 {
     public function index(){
         echo "<h1>it works</h1>";
@@ -22,5 +22,9 @@ class UsersController extends BaseController
     public function register(){
         //$this->view->appendToLayout('body', 'users.register');
         $this->view->display('layouts.default');
+    }
+
+    public function profile(){
+        echo '<h1> You are in.</h1>';
     }
 }

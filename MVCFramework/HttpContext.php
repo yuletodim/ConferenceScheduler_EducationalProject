@@ -15,6 +15,16 @@ class HttpContext
      * @var \MVCFramework\Request
      */
     private $_request = null;
+
+    /**
+     * @var \MVCFramework\IdentitySystem\CurrentUser
+     */
+    private $_user = null;
+
+    /**
+     * @var \MVCFramework\Sessions\ISession
+     */
+    private $_session = null;
     private $_cookies = array();
 
     private function __construct(){
@@ -35,6 +45,52 @@ class HttpContext
 
     public function getRequest() : \MVCFramework\Request{
         return $this->_request;
+    }
+
+    public function getSession() : \MVCFramework\Sessions\ISession{
+        return $this->_session;
+    }
+
+    public function setUser(\MVCFramework\IdentitySystem\CurrentUser $user){
+        $this->_user = $user;
+    }
+
+    public function getUser() : \MVCFramework\IdentitySystem\CurrentUser{
+        return $this->_user;
+
+    }
+
+    public function setSession(){
+        // start session
+        $_sess = \MVCFramework\App::getInstance()->getConfig()->app['session'];
+        if($_sess['autostart']) {
+            if ($_sess['type'] == 'native') {
+                $session = new \MVCFramework\Sessions\NativeSession(
+                    $_sess['name'],
+                    $_sess['lifetime'],
+                    $_sess['path'],
+                    $_sess['domain'],
+                    $_sess['secure']
+                );
+
+                $this->_session  = $session;
+                echo print_r($this->_session) . '<br/>';
+            } else if ($_sess['type'] == 'database') {
+                $session = new \MVCFramework\Sessions\DBSession(
+                    $_sess['db_connection'],
+                    $_sess['name'],
+                    $_sess['db_table'],
+                    $_sess['lifetime'],
+                    $_sess['path'],
+                    $_sess['domain'],
+                    $_sess['secure']
+                );
+
+                $this->_session  = $session;
+            } else {
+                throw new \Exception('No valid session.', 500);
+            }
+        }
     }
 
     public function hasCookieValue(string $name) : bool{
