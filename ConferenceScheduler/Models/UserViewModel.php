@@ -26,10 +26,10 @@ class UserViewModel extends \MVCFramework\Database
     {
         parent::__construct($connection);
         $this->setId($id)
-            ->setUsername($username)
-            ->setEmail($email)
-            ->setFirstName($firstName)
-            ->setL;
+            ->setUsername($username);
+        $this->setEmail($email)
+            ->setFirstName($firstName);
+        $this->setLastName($lastName);
     }
 
     public function getId()

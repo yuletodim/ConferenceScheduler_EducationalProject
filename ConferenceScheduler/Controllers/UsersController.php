@@ -33,6 +33,7 @@ class UsersController extends \MVCFramework\IdentitySystem\DefaultUsersControler
     }
 
     public function login(){
+        $this->view->title = 'Register';
         $this->view->appendToLayout('body', 'users.login');
         $this->view->display('layouts.default_template');
         if($this->context->getRequest()->getPostArray()){
