@@ -98,7 +98,7 @@ class View
             $path = realpath($path) . DIRECTORY_SEPARATOR;
             if (is_dir($path) && is_readable($path)) {
                 $this->_viewsDir = $path;
-                echo 'Dir: '.$this->_viewsDir.'<br/>';
+                // echo 'Dir: '.$this->_viewsDir.'<br/>';
             } else {
                 throw new \Exception('Invalid path for view directory.', 500);
             }

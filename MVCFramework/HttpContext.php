@@ -60,6 +60,10 @@ class HttpContext
 
     }
 
+    public function isLogged(){
+        return $this->_session;
+    }
+
     public function setSession(){
         // start session
         $_sess = \MVCFramework\App::getInstance()->getConfig()->app['session'];

@@ -20,21 +20,24 @@ class UsersController extends \MVCFramework\IdentitySystem\DefaultUsersControler
     }
 
     public function register(){
+        $this->view->appendToLayout('header', 'partials.header');
         $this->view->appendToLayout('body', 'users.register');
+        $this->view->appendToLayout('footer', 'partials.footer');
         $this->view->display('layouts.default_template');
         if($this->context->getRequest()->getPostArray()){
             try{
                 parent::register();
             } catch(\Exception $ex){
                 $this->view->error = $ex->getMessage();
-                echo '<div>' . $ex->getMessage() . '</div>';
+                echo '<div class="text-warning">' . $ex->getMessage() . '</div>';
             }
         }
     }
 
     public function login(){
-        $this->view->title = 'Register';
+        $this->view->appendToLayout('header', 'partials.header');
         $this->view->appendToLayout('body', 'users.login');
+        $this->view->appendToLayout('footer', 'partials.footer');
         $this->view->display('layouts.default_template');
         if($this->context->getRequest()->getPostArray()){
             try{

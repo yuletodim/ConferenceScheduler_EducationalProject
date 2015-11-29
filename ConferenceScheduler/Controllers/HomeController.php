@@ -10,17 +10,18 @@ namespace Controllers;
 class HomeController extends \MVCFramework\BaseController
 {
     public function index(){
+        if(!$this->context->isLogged()){
+            $this->view->appendToLayout('header', 'partials.header');
+            $this->view->appendToLayout('body', 'partials.body');
+        } else {
 
+        }
 
-//        $view = \MVCFramework\View::getInstance();
-//        $view->id = \MVCFramework\HttpContext::getInstance()->getGet(0, 'int');
-
-        $this->view->id = $this->context->getRequest()->getGet(0, 'int');
-        $this->view->test = 'TEST';
-        $this->view->appendToLayout('layout_header', 'partials.layout_header');
-        $this->view->appendToLayout('body', 'index');
-        //$this->view->appendToLayout('side', 'partials.side_bar');
-        $this->view->display('layouts.default_template', array('arr' => array(1, 2, 3)));
+        $this->view->appendToLayout('footer', 'partials.footer');
+        $this->view->display('layouts.default_template');
+        // $this->view->id = $this->context->getRequest()->getGet(0, 'int');
+        // $this->view->test = 'TEST';
+        //$this->view->display('layouts.default_template', array('arr' => array(1, 2, 3)));
         // => if edi kakvo si display edi koi si template
     }
 }

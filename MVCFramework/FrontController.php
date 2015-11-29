@@ -115,18 +115,18 @@ class FrontController
             $this->controller = strtolower($_cacheNamespace['controllers'][$this->controller]['to']);
         }
 
-         echo "Namespace: " . $this->namespace ."<br/>";
-         echo "Controller: ". $this->controller ."<br/>";
-         echo "Method: ". $this-> method ."<br/>";
+         // echo "Namespace: " . $this->namespace ."<br/>";
+         // echo "Controller: ". $this->controller ."<br/>";
+         // echo "Method: ". $this-> method ."<br/>";
         // echo "Params: <br/>";
         // print_r($getParams);
         $getParams = array_values($_params);
         $postParams = $this->router->getPost();
         $request = new \MVCFramework\Request($getParams, $postParams);
         $this->context->setRequest($request);
-        echo "Get input: " . print_r($this->context->getRequest()->getGetArray()) . "<br/>";
-        echo "Post input: " . print_r($this->context->getRequest()->getPostArray()) . "<br/>";
-        echo "Cookies input: " . print_r($this->context->getCookiesArray()) . "<br/>";
+        // echo "Get input: " . print_r($this->context->getRequest()->getGetArray()) . "<br/>";
+        // echo "Post input: " . print_r($this->context->getRequest()->getPostArray()) . "<br/>";
+        // echo "Cookies input: " . print_r($this->context->getCookiesArray()) . "<br/>";
 
         $fileController = $this->namespace . '\\' .ucfirst($this->controller) . self::CONTROLLERS_SUFFIX;
         // echo $fileController . '<br/>';

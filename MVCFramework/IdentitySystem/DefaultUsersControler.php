@@ -15,9 +15,9 @@ class DefaultUsersControler extends \MVCFramework\BaseController
         $username = $this->context->getRequest()->getPost('username');
         $email = $this->context->getRequest()->getPost('email');
         $password = $this->context->getRequest()->getPost('password');
-        $repeatPassword = $this->context->getRequest()->getPost('repeat-password');
-        if($password != $repeatPassword){
-            throw new \Exception('Repeated password is diferent than password.');
+        $confirmPassword = $this->context->getRequest()->getPost('confirm-password');
+        if($password != $confirmPassword){
+            throw new \Exception('Confirmed password is different than password.');
         }
 
         $newUser = new \MVCFramework\IdentitySystem\RegisterUserBindingModel($username, $email, $password);
@@ -26,10 +26,10 @@ class DefaultUsersControler extends \MVCFramework\BaseController
         if($currentUser){
             $this->context->setSession();
             $this->context->setUser($currentUser);
-            header("Location: profile");
-        } else {
-            header("Location: register");
-        }
+            header("Location: profile");}
+//        } else {
+//            header("Location: register");
+//        }
     }
 
     public function login(){
